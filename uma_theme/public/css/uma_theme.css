@@ -1,0 +1,1406 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   UMA THEME v3 — "Think Less Do More"
+   Roboflow-Inspired Clean Design System for ERPNext v16
+   Colors: Tailwind gray palette + indigo primary
+   Theme-aware: light + dark mode
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── CSS Variables — Tailwind Gray + Indigo Palette ─────────────────────── */
+:root {
+  /* Primary (Indigo) */
+  --uma-primary: #6366f1;           /* indigo-500 */
+  --uma-primary-light: #818cf8;     /* indigo-400 */
+  --uma-primary-dark: #4f46e5;      /* indigo-600 — buttons */
+  --uma-primary-hover: #4338ca;     /* indigo-700 — button hover */
+  --uma-primary-ring: rgba(99, 102, 241, 0.2); /* focus ring 20% */
+
+  /* Semantic */
+  --uma-success: #059669;           /* green-600 */
+  --uma-success-light: #dcfce7;     /* green-100 */
+  --uma-success-dark: #166534;      /* green-800 */
+  --uma-warning: #f59e0b;           /* amber-500 */
+  --uma-warning-light: #fef3c7;     /* amber-100 */
+  --uma-warning-dark: #92400e;      /* amber-800 */
+  --uma-danger: #dc2626;            /* red-600 */
+  --uma-danger-light: #fee2e2;      /* red-100 */
+  --uma-danger-dark: #991b1b;       /* red-800 */
+
+  /* Backgrounds */
+  --uma-bg: #f9fafb;               /* gray-50 */
+  --uma-bg-card: #ffffff;
+  --uma-bg-sidebar: #ffffff;
+  --uma-bg-hover: #f9fafb;         /* gray-50 */
+  --uma-bg-input: #ffffff;
+  --uma-bg-navbar: rgba(255, 255, 255, 0.92);
+
+  /* Text — Tailwind gray (neutral, not blue-tinted) */
+  --uma-text: #111827;              /* gray-900 */
+  --uma-text-muted: #374151;        /* gray-700 */
+  --uma-text-light: #6b7280;        /* gray-500 */
+  --uma-text-placeholder: #9ca3af;  /* gray-400 */
+  --uma-text-xs: #4b5563;           /* gray-600 */
+
+  /* Borders */
+  --uma-border: #e5e7eb;            /* gray-200 */
+  --uma-border-input: #d1d5db;      /* gray-300 — inputs are darker */
+  --uma-border-light: #f3f4f6;      /* gray-100 */
+
+  /* Shadows — Tailwind shadow-sm / shadow-md */
+  --uma-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --uma-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --uma-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --uma-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+  /* Only for sidebar branding — NOT buttons */
+  --uma-gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+
+  /* Radius — rounded-lg (8px) default, rounded-xl (12px) cards */
+  --uma-radius: 12px;
+  --uma-radius-sm: 8px;
+  --uma-radius-lg: 16px;
+  --uma-radius-pill: 6px;           /* badges/pills — rounded-md */
+
+  --uma-transition: all 0.2s ease;
+}
+
+/* ── Dark Mode ──────────────────────────────────────────────────────────── */
+[data-theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"] {
+  --uma-bg: #111827;
+  --uma-bg-card: #1f2937;
+  --uma-bg-sidebar: #1f2937;
+  --uma-bg-hover: #1f2937;
+  --uma-bg-input: #1f2937;
+  --uma-bg-navbar: rgba(17, 24, 39, 0.92);
+  --uma-text: #f9fafb;
+  --uma-text-muted: #d1d5db;
+  --uma-text-light: #9ca3af;
+  --uma-text-placeholder: #6b7280;
+  --uma-text-xs: #9ca3af;
+  --uma-border: #374151;
+  --uma-border-input: #4b5563;
+  --uma-border-light: #1f2937;
+  --uma-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --uma-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --uma-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --uma-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Global Base ────────────────────────────────────────────────────────── */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+  background: var(--uma-bg) !important;
+  color: var(--uma-text) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SIDEBAR BRANDING
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.sidebar-header {
+  padding: 10px 12px !important;
+  transition: var(--uma-transition);
+  border-radius: var(--uma-radius-sm);
+}
+
+.sidebar-header:hover {
+  background: var(--uma-bg-hover) !important;
+}
+
+.sidebar-header .sidebar-item-icon {
+  background: var(--uma-gradient-primary) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  min-width: 32px !important;
+  min-height: 32px !important;
+}
+
+.sidebar-header .header-logo .uma-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  color: white;
+  line-height: 1;
+}
+
+.sidebar-header .header-logo svg,
+.sidebar-header .header-logo img {
+  display: none !important;
+}
+
+.sidebar-header .title-container {
+  margin-left: 8px !important;
+  overflow: hidden;
+}
+
+.sidebar-header .header-title {
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  color: var(--uma-text) !important;
+  line-height: 1.3;
+}
+
+.sidebar-header .header-subtitle {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1.3;
+  margin-top: 1px !important;
+}
+
+.sidebar-header .header-subtitle.uma-branded {
+  background: var(--uma-gradient-primary) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ── Left Sidebar ──────────────────────────────────────────────────────── */
+.body-sidebar {
+  background: var(--uma-bg-sidebar) !important;
+  border-right: 1px solid var(--uma-border) !important;
+}
+
+.body-sidebar .standard-sidebar-item a {
+  color: var(--uma-text-light) !important;
+  border-radius: var(--uma-radius-sm) !important;
+  margin: 1px 6px !important;
+  padding: 7px 12px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: var(--uma-transition);
+}
+
+.body-sidebar .standard-sidebar-item a:hover {
+  background: var(--uma-bg-hover) !important;
+  color: var(--uma-text) !important;
+}
+
+.body-sidebar .standard-sidebar-item a.selected,
+.body-sidebar .standard-sidebar-item a.active {
+  background: rgba(99, 102, 241, 0.08) !important;
+  color: var(--uma-primary) !important;
+  font-weight: 600 !important;
+}
+
+.body-sidebar .sidebar-label {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--uma-text-light) !important;
+  padding: 14px 18px 4px !important;
+}
+
+/* ── Navbar ─────────────────────────────────────────────────────────────── */
+.navbar {
+  background: var(--uma-bg-navbar) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid var(--uma-border) !important;
+  box-shadow: var(--uma-shadow-sm) !important;
+  transition: var(--uma-transition);
+}
+
+.navbar .navbar-home .app-logo,
+.navbar .navbar-home img { display: none !important; }
+
+.navbar .navbar-home {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  padding: 4px 10px !important;
+  border-radius: var(--uma-radius-sm);
+  transition: var(--uma-transition);
+}
+
+.navbar .navbar-home::before {
+  content: "\2726";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--uma-primary-dark);
+  border-radius: 8px;
+  font-size: 14px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.navbar .navbar-home::after {
+  content: "think less do more";
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--uma-text);
+  white-space: nowrap;
+}
+
+.navbar .navbar-home:hover { background: var(--uma-bg-hover) !important; }
+
+.navbar .search-bar,
+.navbar .form-control {
+  background: var(--uma-bg) !important;
+  border: 1px solid var(--uma-border) !important;
+  border-radius: var(--uma-radius-sm) !important;
+  color: var(--uma-text) !important;
+  font-size: 13px !important;
+  transition: var(--uma-transition);
+}
+
+.navbar .search-bar:focus,
+.navbar .form-control:focus {
+  border-color: var(--uma-primary) !important;
+  box-shadow: 0 0 0 2px var(--uma-primary-ring) !important;
+}
+
+.navbar .nav-link,
+.navbar .dropdown-toggle {
+  color: var(--uma-text-light) !important;
+  border-radius: var(--uma-radius-sm) !important;
+  transition: var(--uma-transition);
+}
+
+.navbar .nav-link:hover,
+.navbar .dropdown-toggle:hover {
+  color: var(--uma-text) !important;
+  background: var(--uma-bg-hover) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FORM VIEW
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Page Head & Breadcrumbs ───────────────────────────────────────────── */
+.page-head {
+  background: var(--uma-bg-card) !important;
+  border-bottom: 1px solid var(--uma-border) !important;
+  box-shadow: var(--uma-shadow-sm) !important;
+}
+
+.page-head .page-title .title-text {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--uma-text) !important;
+}
+
+.page-head .navbar-breadcrumbs a {
+  color: var(--uma-text-light) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: var(--uma-transition);
+}
+
+.page-head .navbar-breadcrumbs a:hover { color: var(--uma-primary) !important; }
+
+.page-head .navbar-breadcrumbs li:last-child > a {
+  color: var(--uma-text) !important;
+  font-weight: 600 !important;
+}
+
+.page-head .navbar-breadcrumbs a::before { color: var(--uma-text-placeholder) !important; }
+
+/* Page action buttons */
+.page-actions .btn {
+  border-radius: var(--uma-radius-sm) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 8px 16px !important;
+  transition: var(--uma-transition);
+}
+
+.page-actions .btn-primary-dark,
+.page-actions .btn-primary {
+  background: var(--uma-primary-dark) !important;
+  border: none !important;
+  box-shadow: var(--uma-shadow-sm) !important;
+  color: white !important;
+}
+
+.page-actions .btn-primary-dark:hover,
+.page-actions .btn-primary:hover {
+  background: var(--uma-primary-hover) !important;
+  box-shadow: var(--uma-shadow-md) !important;
+}
+
+.page-actions .btn-default,
+.page-actions .btn-secondary {
+  background: var(--uma-bg-card) !important;
+  border: 1px solid var(--uma-border-input) !important;
+  color: var(--uma-text-muted) !important;
+}
+
+.page-actions .btn-default:hover,
+.page-actions .btn-secondary:hover {
+  background: var(--uma-bg-hover) !important;
+  border-color: #9ca3af !important;
+  color: var(--uma-text) !important;
+}
+
+/* ── Form Tabs ─────────────────────────────────────────────────────────── */
+.form-tabs-list {
+  background: var(--uma-bg-card) !important;
+  border-bottom: 1px solid var(--uma-border) !important;
+  padding: 0 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.form-tabs-list .form-tabs .nav-item .nav-link {
+  color: var(--uma-text-light) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  padding: 10px 16px !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  transition: var(--uma-transition);
+}
+
+.form-tabs-list .form-tabs .nav-item .nav-link:hover {
+  color: var(--uma-text) !important;
+  background: var(--uma-bg-hover) !important;
+}
+
+.form-tabs-list .form-tabs .nav-item .nav-link.active {
+  color: var(--uma-primary) !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid var(--uma-primary) !important;
+  background: transparent !important;
+}
+
+/* ── Form Sections — Clean Cards ───────────────────────────────────────── */
+.form-page,
+.layout-main-section-wrapper {
+  background: var(--uma-bg) !important;
+}
+
+.row.form-section.card-section.visible-section {
+  background: var(--uma-bg-card) !important;
+  border: 1px solid var(--uma-border) !important;
+  border-radius: var(--uma-radius) !important;
+  box-shadow: var(--uma-shadow-sm) !important;
+  margin-bottom: 14px !important;
+  padding: 0 !important;
+  transition: box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.row.form-section.card-section.visible-section:hover {
+  box-shadow: var(--uma-shadow-md) !important;
+}
+
+/* Section head — clean, no gradient */
+.row.form-section.card-section .section-head {
+  background: transparent !important;
+  padding: 14px 20px !important;
+  margin: 0 !important;
+  border-bottom: 1px solid var(--uma-border-light) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--uma-text) !important;
+}
+
+.row.form-section.card-section .section-head .collapse-indicator {
+  color: var(--uma-text-placeholder) !important;
+  transition: var(--uma-transition);
+}
+
+.row.form-section.card-section .section-head.collapsible:hover {
+  background: var(--uma-bg-hover) !important;
+  cursor: pointer;
+}
+
+.row.form-section.card-section .section-body {
+  padding: 16px 20px 8px !important;
+}
+
+/* Fallback sections */
+.form-section .section-head {
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: var(--uma-text) !important;
+  padding: 10px 16px !important;
+  border-radius: var(--uma-radius-sm) !important;
+}
+
+.form-section .section-head:hover { background: var(--uma-bg-hover) !important; }
+.form-section .section-body { border-radius: var(--uma-radius-sm) !important; }
+
+/* ── Form Labels — Normal Case, Semibold (globals.css .label) ──────────── */
+.frappe-control .control-label,
+label.control-label {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--uma-text-muted) !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  margin-bottom: 6px !important;
+}
+
+/* ── Form Inputs (globals.css .input) ──────────────────────────────────── */
+.frappe-control .form-control,
+.frappe-control .input-with-feedback:not([type="checkbox"]):not([type="radio"]),
+.frappe-control select.form-control {
+  background: var(--uma-bg-input) !important;
+  border: 1px solid var(--uma-border-input) !important;
+  border-radius: var(--uma-radius-sm) !important;
+  color: var(--uma-text) !important;
+  font-size: 14px !important;
+  padding: 8px 12px !important;
+  min-height: 38px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.frappe-control .form-control::placeholder {
+  color: var(--uma-text-placeholder) !important;
+}
+
+.frappe-control .form-control:focus,
+.frappe-control .input-with-feedback:not([type="checkbox"]):not([type="radio"]):focus {
+  border-color: var(--uma-primary) !important;
+  box-shadow: 0 0 0 2px var(--uma-primary-ring) !important;
+  outline: none !important;
+}
+
+/* Checkboxes */
+.frappe-control[data-fieldtype="Check"] input[type="checkbox"],
+.frappe-control input[type="checkbox"].input-with-feedback {
+  width: 16px !important;
+  height: 16px !important;
+  min-height: unset !important;
+  padding: 0 !important;
+  border: 1.5px solid var(--uma-border-input) !important;
+  border-radius: 4px !important;
+  accent-color: var(--uma-primary);
+  cursor: pointer;
+  -webkit-appearance: auto !important;
+  appearance: auto !important;
+}
+
+/* Disabled / Read-only */
+.frappe-control .form-control:disabled,
+.frappe-control .form-control[readonly],
+.frappe-control .like-disabled-input {
+  background: var(--uma-bg) !important;
+  color: var(--uma-text-light) !important;
+  border-color: var(--uma-border) !important;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Error state */
+.frappe-control.has-error .form-control {
+  border-color: var(--uma-danger) !important;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
+}
+
+/* Form columns */
+.form-column { padding: 0 12px !important; }
+.form-column .form-group { margin-bottom: 16px !important; }
+
+.form-column .column-label {
+  font-weight: 600 !important;
+  color: var(--uma-text-muted) !important;
+  font-size: 14px !important;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-bottom: 10px !important;
+  padding-bottom: 6px !important;
+  border-bottom: 1px solid var(--uma-border-light) !important;
+}
+
+/* ── Form Sidebar ──────────────────────────────────────────────────────── */
+.layout-side-section {
+  background: var(--uma-bg-card) !important;
+  border-left: 1px solid var(--uma-border) !important;
+}
+
+.form-sidebar .sidebar-section {
+  padding: 14px 16px !important;
+  border-bottom: 1px solid var(--uma-border-light) !important;
+}
+
+.form-sidebar .sidebar-section:last-child { border-bottom: none !important; }
+
+.layout-side-section .sidebar-label {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--uma-text-light) !important;
+}
+
+.form-sidebar .sidebar-image-section .sidebar-image,
+.form-sidebar .sidebar-image-section .sidebar-standard-image {
+  border-radius: var(--uma-radius) !important;
+}
+
+.form-sidebar .user-action-link {
+  border-radius: var(--uma-radius-sm) !important;
+  transition: var(--uma-transition);
+}
+
+.form-sidebar .user-action-link:hover { background: var(--uma-bg-hover) !important; }
+
+/* Tags — globals.css .badge-info style */
+.form-sidebar .form-tag-row .data-pill,
+.tag-pill,
+.frappe-tag {
+  background: rgba(99, 102, 241, 0.08) !important;
+  color: var(--uma-primary) !important;
+  border-radius: var(--uma-radius-pill) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.2) !important;
+}
+
+.form-sidebar .modified-by .frappe-timestamp,
+.form-sidebar .created-by .frappe-timestamp {
+  color: var(--uma-text-light) !important;
+  font-size: 12px !important;
+}
+
+/* ── Table Fields (globals.css .table-container) ───────────────────────── */
+.frappe-control[data-fieldtype="Table"] .frappe-control .form-group { margin-bottom: 0 !important; }
+
+.dt-scrollable {
+  border: 1px solid var(--uma-border) !important;
+  border-radius: var(--uma-radius-sm) !important;
+  overflow: hidden;
+}
+
+/* Table header — globals.css .table-header-cell */
+.dt-header {
+  background: var(--uma-bg) !important;
+}
+
+.dt-header .dt-cell {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--uma-text-muted) !important;
+}
+
+.dt-cell { border-color: var(--uma-border) !important; }
+
+/* Table row hover — globals.css .table-row */
+.dt-row:hover .dt-cell { background: var(--uma-bg-hover) !important; }
+
+.frappe-control[data-fieldtype="Table"] .grid-footer {
+  border-top: 1px solid var(--uma-border-light) !important;
+  padding: 8px 12px !important;
+}
+
+.frappe-control[data-fieldtype="Table"] .grid-footer .btn-xs {
+  border-radius: var(--uma-radius-sm) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--uma-primary) !important;
+  transition: var(--uma-transition);
+}
+
+.frappe-control[data-fieldtype="Table"] .grid-footer .btn-xs:hover {
+  background: rgba(99, 102, 241, 0.06) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   WORKSPACE & GENERAL UI
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.workspace-container {
+  padding: 24px !important;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.workspace-container .widget-head .widget-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--uma-text) !important;
+}
+
+/* Widget cards — globals.css .card */
+.widget.shortcut-widget-box,
+.widget.links-widget-box,
+.widget.number-widget-box,
+.widget.chart-widget-box,
+.widget.onboarding-widget-box,
+.widget.custom-block-widget-box {
+  background: var(--uma-bg-card) !important;
+  border: 1px solid var(--uma-border) !important;
+  border-radius: var(--uma-radius) !important;
+  box-shadow: var(--uma-shadow-sm) !important;
+  transition: box-shadow 0.2s ease;
+}
+
+.widget.shortcut-widget-box:hover,
+.widget.links-widget-box:hover,
+.widget.number-widget-box:hover,
+.widget.chart-widget-box:hover {
+  box-shadow: var(--uma-shadow-md) !important;
+}
+
+/* Stat card number — globals.css .stat-value */
+.widget.number-widget-box .widget-body .number {
+  font-size: 30px !important;
+  font-weight: 700 !important;
+  color: var(--uma-text) !important;
+}
+
+.widget.links-widget-box .link-content,
+.widget.links-widget-box .widget-body a {
+  border-radius: var(--uma-radius-sm) !important;
+  padding: 5px 10px !important;
+  transition: var(--uma-transition);
+  color: var(--uma-text) !important;
+}
+
+.widget.links-widget-box .link-content:hover,
+.widget.links-widget-box .widget-body a:hover {
+  background: var(--uma-bg-hover) !important;
+  color: var(--uma-primary) !important;
+}
+
+/* ── Buttons — Solid, No Gradient (globals.css .btn-primary) ───────────── */
+.btn-primary,
+.btn-primary-dark {
+  background: var(--uma-primary-dark) !important;
+  border: none !important;
+  border-radius: var(--uma-radius-sm) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  padding: 10px 16px !important;
+  box-shadow: var(--uma-shadow-sm) !important;
+  transition: var(--uma-transition);
+  color: white !important;
+}
+
+.btn-primary:hover,
+.btn-primary-dark:hover {
+  background: var(--uma-primary-hover) !important;
+  box-shadow: var(--uma-shadow-md) !important;
+}
+
+/* Secondary — globals.css .btn-secondary */
+.btn-default,
+.btn-secondary {
+  background: var(--uma-bg-card) !important;
+  border: 1px solid var(--uma-border-input) !important;
+  border-radius: var(--uma-radius-sm) !important;
+  color: var(--uma-text-muted) !important;
+  font-weight: 500 !important;
+  transition: var(--uma-transition);
+}
+
+.btn-default:hover,
+.btn-secondary:hover {
+  background: var(--uma-bg-hover) !important;
+  border-color: #9ca3af !important;
+  color: var(--uma-text) !important;
+}
+
+/* Small buttons — globals.css .btn-sm */
+.btn-sm {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.btn-xs {
+  padding: 4px 8px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* ── Status Badges — globals.css ring-inset style ──────────────────────── */
+.indicator-pill {
+  border-radius: var(--uma-radius-pill) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+}
+
+.indicator-pill.green {
+  background: var(--uma-success-light) !important;
+  color: var(--uma-success-dark) !important;
+  box-shadow: inset 0 0 0 1px rgba(5, 150, 105, 0.2) !important;
+}
+
+.indicator-pill.blue {
+  background: rgba(99, 102, 241, 0.08) !important;
+  color: var(--uma-primary-dark) !important;
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.2) !important;
+}
+
+.indicator-pill.orange {
+  background: var(--uma-warning-light) !important;
+  color: var(--uma-warning-dark) !important;
+  box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.2) !important;
+}
+
+.indicator-pill.red {
+  background: var(--uma-danger-light) !important;
+  color: var(--uma-danger-dark) !important;
+  box-shadow: inset 0 0 0 1px rgba(220, 38, 38, 0.2) !important;
+}
+
+.indicator-pill.gray {
+  background: var(--uma-bg) !important;
+  color: var(--uma-text-muted) !important;
+  box-shadow: inset 0 0 0 1px rgba(107, 114, 128, 0.2) !important;
+}
+
+/* ── List View — globals.css .table ────────────────────────────────────── */
+.list-row {
+  border-bottom: 1px solid var(--uma-border) !important;
+  transition: background-color 0.15s ease;
+}
+
+.list-row:hover { background: var(--uma-bg-hover) !important; }
+
+.list-row-head {
+  background: var(--uma-bg) !important;
+  border-bottom: 1px solid var(--uma-border) !important;
+}
+
+/* List header cells — globals.css .table-header-cell */
+.list-row-head .list-header-subject,
+.list-row-head .list-row--col {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--uma-text-muted) !important;
+}
+
+.level-left .list-row--col .ellipsis .filterable {
+  color: var(--uma-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Dropdowns ─────────────────────────────────────────────────────────── */
+.dropdown-menu {
+  background: var(--uma-bg-card) !important;
+  border: 1px solid var(--uma-border) !important;
+  border-radius: var(--uma-radius-sm) !important;
+  box-shadow: var(--uma-shadow-lg) !important;
+  padding: 4px !important;
+}
+
+.dropdown-menu .dropdown-item,
+.dropdown-menu a {
+  border-radius: var(--uma-radius-pill) !important;
+  padding: 8px 12px !important;
+  color: var(--uma-text) !important;
+  font-size: 14px !important;
+  transition: var(--uma-transition);
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu a:hover {
+  background: var(--uma-bg-hover) !important;
+  color: var(--uma-text) !important;
+}
+
+/* ── Modal ──────────────────────────────────────────────────────────────── */
+.modal-backdrop {
+  background: rgba(17, 24, 39, 0.5) !important;
+}
+
+.modal-content {
+  background: var(--uma-bg-card) !important;
+  border: 1px solid var(--uma-border) !important;
+  border-radius: var(--uma-radius) !important;
+  box-shadow: var(--uma-shadow-lg) !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--uma-border) !important;
+  padding: 20px 24px !important;
+}
+
+.modal-title {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--uma-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--uma-text-placeholder); }
+
+/* ── Misc ──────────────────────────────────────────────────────────────── */
+.awesomebar-result { border-radius: var(--uma-radius-sm) !important; margin: 2px 0 !important; }
+.awesomebar-result:hover,
+.awesomebar-result.selected { background: var(--uma-bg-hover) !important; }
+
+.comment-box {
+  border: 1px solid var(--uma-border) !important;
+  border-radius: var(--uma-radius-sm) !important;
+  background: var(--uma-bg-card) !important;
+}
+
+.frappe-card,
+.form-dashboard,
+.report-wrapper {
+  background: var(--uma-bg-card) !important;
+  border: 1px solid var(--uma-border) !important;
+  border-radius: var(--uma-radius) !important;
+  box-shadow: var(--uma-shadow-sm) !important;
+}
+
+.toast {
+  border-radius: var(--uma-radius-sm) !important;
+  box-shadow: var(--uma-shadow-lg) !important;
+  border: 1px solid var(--uma-border) !important;
+}
+
+.alert {
+  border-radius: var(--uma-radius-sm) !important;
+  font-size: 14px !important;
+}
+
+a { transition: color 0.15s ease; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — Minimal
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes uma-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-page { animation: uma-fade-in 0.2s ease-out; }
+
+@keyframes uma-sparkle-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Home Banner ───────────────────────────────────────────────────────── */
+.uma-home-banner {
+  background: var(--uma-gradient-primary);
+  border-radius: var(--uma-radius);
+  padding: 32px 40px;
+  margin-bottom: 24px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   BENTO GRID HOME PAGE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.uma-bento-home {
+  padding: 24px 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  animation: uma-fade-in 0.3s ease-out;
+}
+
+/* ── Hero Banner ───────────────────────────────────────────────────────── */
+.uma-hero {
+  background: var(--uma-primary-dark);
+  border-radius: var(--uma-radius);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.uma-hero-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.uma-hero-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.uma-hero-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.uma-hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin: 4px 0 0;
+}
+
+.uma-hero-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.uma-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: var(--uma-radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: var(--uma-transition);
+  white-space: nowrap;
+}
+
+.uma-hero-btn-primary {
+  background: white;
+  color: var(--uma-primary-dark) !important;
+}
+
+.uma-hero-btn-primary:hover {
+  background: #f0f0ff;
+  color: var(--uma-primary-hover) !important;
+}
+
+.uma-hero-btn-secondary {
+  background: rgba(255,255,255,0.15);
+  color: white !important;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.uma-hero-btn-secondary:hover {
+  background: rgba(255,255,255,0.25);
+  color: white !important;
+}
+
+/* ── Bento Grid ────────────────────────────────────────────────────────── */
+.uma-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ── Module Card ───────────────────────────────────────────────────────── */
+.uma-bento-card {
+  background: var(--uma-bg-card);
+  border: 1px solid var(--uma-border);
+  border-radius: var(--uma-radius);
+  box-shadow: var(--uma-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.uma-bento-card:hover {
+  box-shadow: var(--uma-shadow-md);
+}
+
+/* Card header — icon + title area */
+.uma-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 20px 0;
+  text-decoration: none !important;
+}
+
+.uma-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  color: white;
+}
+
+.uma-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--uma-text) !important;
+  line-height: 1.2;
+}
+
+.uma-card-desc {
+  font-size: 13px;
+  color: var(--uma-text-light);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* Card stats row */
+.uma-card-stats {
+  display: flex;
+  gap: 16px;
+  padding: 14px 20px 0;
+}
+
+.uma-card-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.uma-card-stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--uma-text);
+  line-height: 1;
+  min-width: 30px;
+  transition: color 0.3s ease;
+}
+
+.uma-card-stat-value.uma-stat-loaded {
+  color: var(--uma-text);
+}
+
+.uma-card-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--uma-text-light);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Card quick links */
+.uma-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 12px 16px 16px;
+  margin-top: auto;
+}
+
+.uma-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--uma-text-light) !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  transition: var(--uma-transition);
+}
+
+.uma-card-link:hover {
+  background: var(--uma-bg-hover);
+  color: var(--uma-primary) !important;
+}
+
+.uma-card-link-arrow {
+  font-size: 12px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.15s ease;
+}
+
+.uma-card-link:hover .uma-card-link-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   HELP SYSTEM — Slide Panel + Field Tooltips
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Help button in page header */
+.uma-help-btn {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--uma-border-input) !important;
+  background: var(--uma-bg-card) !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--uma-transition);
+  margin-right: 8px !important;
+}
+
+.uma-help-btn:hover {
+  border-color: var(--uma-primary) !important;
+  background: rgba(99, 102, 241, 0.06) !important;
+}
+
+.uma-help-btn-icon {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--uma-text-light);
+  line-height: 1;
+}
+
+.uma-help-btn:hover .uma-help-btn-icon {
+  color: var(--uma-primary);
+}
+
+/* Overlay */
+.uma-help-panel .uma-help-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.3);
+  z-index: 1049;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.uma-help-panel.open .uma-help-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Slide drawer */
+.uma-help-panel .uma-help-drawer {
+  position: fixed;
+  right: -420px;
+  top: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 90vw;
+  background: var(--uma-bg-card);
+  border-left: 1px solid var(--uma-border);
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.1);
+  z-index: 1050;
+  overflow-y: auto;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.uma-help-panel.open .uma-help-drawer {
+  right: 0;
+}
+
+/* Header */
+.uma-help-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--uma-border);
+  position: sticky;
+  top: 0;
+  background: var(--uma-bg-card);
+  z-index: 1;
+}
+
+.uma-help-title {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: var(--uma-text) !important;
+  margin: 0 !important;
+  letter-spacing: -0.01em;
+}
+
+.uma-help-module-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--uma-primary-dark);
+  background: rgba(99, 102, 241, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.uma-help-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  color: var(--uma-text-light);
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--uma-transition);
+  flex-shrink: 0;
+}
+
+.uma-help-close:hover {
+  background: var(--uma-bg-hover);
+  color: var(--uma-text);
+}
+
+/* Body */
+.uma-help-body {
+  padding: 20px 24px;
+}
+
+.uma-help-section {
+  margin-bottom: 24px;
+}
+
+.uma-help-section h4 {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--uma-text) !important;
+  margin: 0 0 10px !important;
+  letter-spacing: 0.01em;
+}
+
+.uma-help-section p {
+  font-size: 14px;
+  color: var(--uma-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.uma-help-section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.uma-help-section ul li {
+  font-size: 14px;
+  color: var(--uma-text-muted);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+/* Workflow badge */
+.uma-help-workflow {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--uma-primary-dark);
+  background: rgba(99, 102, 241, 0.06);
+  padding: 10px 14px;
+  border-radius: var(--uma-radius-sm);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  line-height: 1.5;
+}
+
+/* Key Fields list */
+.uma-help-fields {
+  margin: 0;
+}
+
+.uma-help-fields dt {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--uma-text);
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.uma-help-fields dt:first-child {
+  margin-top: 0;
+}
+
+.uma-help-fields dd {
+  font-size: 13px;
+  color: var(--uma-text-light);
+  line-height: 1.5;
+  margin: 0 0 0 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--uma-border-light);
+}
+
+/* Empty state */
+.uma-help-empty {
+  text-align: center;
+  color: var(--uma-text-light);
+  padding: 40px 20px;
+  font-size: 14px;
+}
+
+/* ── Field Tooltips ────────────────────────────────────────────────────── */
+
+.uma-field-help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  color: var(--uma-text-placeholder);
+  cursor: help;
+  margin-left: 4px;
+  opacity: 0.5;
+  transition: var(--uma-transition);
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.uma-field-help:hover {
+  opacity: 1;
+  color: var(--uma-primary);
+  background: rgba(99, 102, 241, 0.08);
+}
+
+/* Tooltip popup */
+.uma-field-tooltip {
+  position: fixed;
+  z-index: 9999;
+  max-width: 300px;
+  padding: 8px 12px;
+  background: var(--uma-text);
+  color: white;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.uma-field-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Body scroll lock when panel open */
+body.uma-help-open {
+  overflow: hidden;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .uma-bento-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .navbar .navbar-home::after { content: "TLDM"; font-size: 12px; }
+  .workspace-container { padding: 12px !important; }
+  .row.form-section.card-section .section-body { padding: 12px 14px 4px !important; }
+  .uma-bento-home { padding: 16px; }
+  .uma-bento-grid { grid-template-columns: 1fr; }
+  .uma-hero { flex-direction: column; align-items: flex-start; }
+  .uma-hero-title { font-size: 18px; }
+}
+
+@media print {
+  .navbar, .body-sidebar, .page-head { display: none !important; }
+}
