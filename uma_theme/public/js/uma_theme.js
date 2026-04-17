@@ -187,7 +187,7 @@
       id: 'hrms', title: 'Human Resources', icon: '\uD83D\uDC64',
       desc: 'Leaves, attendance, shifts, and holidays',
       color: '#9333ea',
-      route: '/app/hr',
+      route: '/app/hr-setup',
       stats: [
         { label: 'Leave Apps', doctype: 'Leave Application' },
         { label: 'Attendance', doctype: 'Attendance' },
