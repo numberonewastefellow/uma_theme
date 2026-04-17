@@ -184,6 +184,38 @@
       ]
     },
     {
+      id: 'hrms', title: 'Human Resources', icon: '\uD83D\uDC64',
+      desc: 'Leaves, attendance, shifts, and holidays',
+      color: '#9333ea',
+      route: '/app/hr',
+      stats: [
+        { label: 'Leave Apps', doctype: 'Leave Application' },
+        { label: 'Attendance', doctype: 'Attendance' },
+      ],
+      links: [
+        { label: 'Leave Application', route: '/app/leave-application' },
+        { label: 'Attendance', route: '/app/attendance' },
+        { label: 'Holiday List', route: '/app/holiday-list' },
+        { label: 'Shift Assignment', route: '/app/shift-assignment' },
+      ]
+    },
+    {
+      id: 'payroll', title: 'Payroll', icon: '\uD83D\uDCB5',
+      desc: 'Salary structures, slips, and payroll runs',
+      color: '#16a34a',
+      route: '/app/payroll',
+      stats: [
+        { label: 'Salary Slips', doctype: 'Salary Slip' },
+        { label: 'Structures', doctype: 'Salary Structure' },
+      ],
+      links: [
+        { label: 'Salary Slip', route: '/app/salary-slip' },
+        { label: 'Salary Structure', route: '/app/salary-structure' },
+        { label: 'Structure Assignment', route: '/app/salary-structure-assignment' },
+        { label: 'Payroll Entry', route: '/app/payroll-entry' },
+      ]
+    },
+    {
       id: 'gst', title: 'GST India', icon: '\uD83C\uDDEE\uD83C\uDDF3',
       desc: 'GST compliance, returns, and e-invoicing',
       color: '#ea580c',
